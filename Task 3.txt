@@ -1,0 +1,22 @@
+Task 3:
+
+
+
+SELECT p.product_name, SUM(o.quantity) AS no_of_quantity, SUM(o.total_amount) AS total_price
+FROM Orders o
+JOIN Products p ON o.product_id = p.product_id
+WHERE MONTH(o.order_date) = MONTH(CURRENT_DATE()) AND YEAR(o.order_date) = YEAR(CURRENT_DATE())
+GROUP BY p.product_id;
+
+
+
+
+
+_____________________________________________________________________________________________________________________
+
+SELECT c.customer_id, c.customer_name, COUNT(DISTINCT o.product_id) AS no_of_products, SUM(o.quantity) AS no_of_quantity, GROUP_CONCAT(p.product_name SEPARATOR ', ') AS product_names
+FROM Orders o
+JOIN Customers c ON o.customer_id = c.customer_id
+JOIN Products p ON o.product_id = p.product_id
+WHERE MONTH(o.order_date) = MONTH(CURRENT_DATE()) AND YEAR(o.order_date) = YEAR(CURRENT_DATE())
+GROUP BY c.customer_id;
